@@ -1,0 +1,58 @@
+# Pietro Customizations #
+substitutions:
+  device_name: basic-r2-01
+  friendly_name: Casse studio
+  ip_addres: 192.168.100.10
+  platform: esp8266
+  board: esp8285
+
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common.yaml
+
+###################
+## DEVICE CONFIG ##
+###################
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: Button
+    internal: True
+    on_press:
+      # Prevents unintended LED lit states.
+      if:
+        condition:
+          - switch.is_off: relay
+        then:
+          - light.turn_on: blue_led
+          - switch.turn_on: relay
+        else:
+          - switch.turn_off: relay
+  - platform: status
+    name: Status
+    internal: True
+
+light:
+  - platform: status_led
+    id: blue_led
+    internal: True
+    pin:
+      number: GPIO13
+      inverted: True
+
+switch:
+  - platform: gpio
+    name: None
+    pin: GPIO12
+    id: relay
+    on_turn_off:
+      if:
+        condition:
+          - light.is_on: blue_led
+        then:
+          - light.turn_off: blue_led

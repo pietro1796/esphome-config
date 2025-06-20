@@ -1,0 +1,61 @@
+# Pietro Customizations #
+substitutions:
+  device_name: mini-r4-02
+  friendly_name: Luce Sala
+  ip_addres: 192.168.100.26
+  platform: esp32
+  board: esp32dev
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common.yaml
+
+
+###################
+## DEVICE CONFIG ##
+###################
+
+# OUTPUT che controlla il relè
+output:
+  - platform: gpio
+    pin: GPIO26
+    id: relay_output
+
+# LIGHT che usa l'output (visto da Home Assistant come lampadina)
+light:
+  - platform: binary
+    name: ${friendly_name}
+    output: relay_output
+    id: relay_1
+    restore_mode: RESTORE_DEFAULT_OFF
+
+# Pulsante fisico
+binary_sensor:
+  - platform: gpio
+    pin: GPIO00
+    id: button
+    filters:
+      - invert:
+      - delayed_off: 10ms
+    on_press:
+      - light.toggle: relay_1
+
+# Interruttore/Deviatore
+  - platform: gpio
+    name: Switch
+    pin: 
+      number: GPIO27
+      inverted: True
+    id: switch_1
+    on_press:
+      - light.toggle: relay_1
+    ## COMMENTARE LE TRE RIGHE SOTTO SE VIENE INSTALLATO CON PULSANTE
+    ## LASCIARE SE CON INTERRUTTORE E DEVIATORE
+    #on_release:
+    #  - light.toggle: relay_1
+
+# LED di stato
+status_led:
+  pin:
+    number: GPIO19
+    inverted: true

@@ -1,0 +1,115 @@
+# Pietro Customizations #
+substitutions:
+  device_name: teckin-sp22-01
+  friendly_name: TECKIN-SP22-01
+  ip_addres: 192.168.100.11
+
+# Core Configuration #
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+esp8266:
+  board: esp8285
+time:
+  - platform: sntp
+    id: my_time
+    timezone: Europe/Rome
+
+# Utility Configuration #
+logger:
+api:
+ota:
+  - platform: esphome
+captive_portal:
+web_server:
+  port: 80
+  auth:
+    username: !secret web_user
+    password: !secret web_pass
+
+# Network Configuration #
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+  manual_ip:
+    static_ip: ${ip_addres}
+    gateway: 192.168.100.1
+    subnet: 255.255.255.0
+    dns1: 192.168.100.1
+  ap: {}
+
+# Diagnoastic Sensors #
+text_sensor:
+  - platform: version
+    name: ${friendly_name} EspHome Node Version
+    hide_timestamp: true
+
+
+
+###################
+## DEVICE CONFIG ##
+###################
+
+binary_sensor:
+  - platform: gpio
+    id: button
+    internal: true
+    pin:
+      number: GPIO01
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+
+switch:
+  - id: relay
+    platform: gpio
+    internal: true
+    pin: GPIO14
+    on_turn_on:
+      - output.turn_on: relay_status
+    on_turn_off:
+      - output.turn_off: relay_status
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true
+
+light:
+  - platform: binary
+    internal: true
+    name: ${friendly_name} Relay_Status"
+    output: relay_status
+
+output:
+  - id: relay_status
+    platform: gpio
+    pin:
+      number: GPIO03
+      inverted: true
+
+sensor:
+  - platform: hlw8012
+    model: BL0937
+    sel_pin:
+      number: GPIO12
+      inverted: true
+    cf_pin: GPIO04
+    cf1_pin: GPIO05
+    current:
+      name: ${friendly_name} Current
+    voltage:
+      name: ${friendly_name} Voltage
+    power:
+      name: ${friendly_name} Power
+    energy:
+      name: ${friendly_name} Energy
+    update_interval: 10s
+    change_mode_every: 3
+# Diagnoastic Sensors #
+  - platform: wifi_signal
+    name: ${friendly_name} WiFi Signal
+    update_interval: 60s
+  - platform: uptime
+    name: ${friendly_name} Uptime

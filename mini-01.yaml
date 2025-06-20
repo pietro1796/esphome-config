@@ -1,0 +1,54 @@
+# Pietro Customizations #
+substitutions:
+  device_name: mini-01
+  friendly_name: Mini Free 01
+  ip_addres: 192.168.100.11
+  platform: esp8266
+  board: esp8285
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common.yaml
+
+
+###################
+## DEVICE CONFIG ##
+###################
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO00
+    id: reset
+    filters:
+      - invert:
+      - delayed_off: 10ms
+    on_press:
+      - switch.toggle:
+          id: relay_1
+
+  - platform: gpio
+    name: Switch
+    pin: 
+      number: GPIO04
+      inverted: True
+    id: switch_1
+    on_press:
+      - switch.toggle:
+          id: relay_1
+    ## COMMENTARE LE TRE RIGHE SOTTO SE VIENE INSTALLATO CON PULSANTE
+    ## LASCIARE SE CON INTERRUTTORE E DEVIATORE
+    #on_release:
+    #  - switch.toggle:
+    #      id: relay_1
+
+switch:
+  - platform: gpio
+    name: None
+    pin: GPIO12
+    id: relay_1
+    restore_mode: restore_default_off
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes

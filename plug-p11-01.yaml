@@ -1,0 +1,80 @@
+# Pietro Customizations #
+substitutions:
+  device_name: plug-p11-01
+  friendly_name: CED
+  ip_addres: 192.168.100.21
+  update_interval: 10s
+  platform: esp8266
+  board: esp01_1m
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common.yaml
+
+###################
+## DEVICE CONFIG ##
+###################
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO05
+    name: Button
+    internal: True
+    on_press:
+      then:
+        - switch.toggle: relay
+
+uart:
+  rx_pin: GPIO03
+  baud_rate: 4800
+  parity: EVEN
+
+switch:
+  - platform: gpio
+    pin: GPIO13
+    restore_mode: ALWAYS_ON
+    id: relay
+    name: None
+    on_turn_on:
+      - switch.turn_on: led
+    on_turn_off:
+      - switch.turn_off: led
+    internal: True
+
+  - platform: gpio
+    pin:
+      number: GPIO12
+      inverted: yes
+    id: led
+    internal: true
+
+light:
+  - platform: status_led
+    id: blue_led
+    pin:
+      number: GPIO4
+      inverted: true
+    internal: true
+
+
+sensor:
+  - platform: cse7766
+    voltage:
+      name: Voltage
+      filters:
+        - throttle_average: ${update_interval}
+        - calibrate_linear:
+          - 0.0 -> 0.0
+          - 127.0 -> 239.0
+    current:
+      name: Current
+      filters:
+        - throttle_average: ${update_interval}
+    power:
+      name: Power
+      filters:
+        - throttle_average: ${update_interval}
+        - calibrate_linear:
+          - 0.0 -> 0.0
+          - 8.8 -> 16.8
