@@ -1,4 +1,4 @@
-# Core Configuration # AAA-TEST
+# Core Configuration #
 esphome:
   name: ${device_name}
   friendly_name: ${friendly_name}
