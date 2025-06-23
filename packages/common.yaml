@@ -38,7 +38,7 @@ wifi:
     gateway: 192.168.100.1
     subnet: 255.255.255.0
     dns1: 192.168.100.1
-  ap: {}
+  #ap: {} Disabilitato per ridurre canali wifi in casa
 
 
 # Diagnoastic Sensors #
