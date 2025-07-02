@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: plug-p11-01
-  friendly_name: CED
+  friendly_name: P11-01
   ip_addres: 192.168.100.21
   update_interval: 10s
   platform: esp8266
@@ -33,7 +33,7 @@ uart:
 switch:
   - platform: gpio
     pin: GPIO13
-    restore_mode: ALWAYS_ON
+    restore_mode: ALWAYS_OFF
     id: relay
     name: None
     on_turn_on:

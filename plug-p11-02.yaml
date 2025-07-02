@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: plug-p11-02
-  friendly_name: Luce Letto
+  friendly_name: P11-02
   ip_addres: 192.168.100.22
   update_interval: 10s
   platform: esp8266
