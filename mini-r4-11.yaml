@@ -51,8 +51,8 @@ binary_sensor:
       - light.toggle: relay_1
     ## COMMENTARE LE TRE RIGHE SOTTO SE VIENE INSTALLATO CON PULSANTE
     ## LASCIARE SE CON INTERRUTTORE E DEVIATORE
-    #on_release:
-    #  - light.toggle: relay_1
+    on_release:
+      - light.toggle: relay_1
 
 # LED di stato
 status_led:

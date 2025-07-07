@@ -47,7 +47,9 @@ sensor:
     name: WiFi Signal
     update_interval: 60s
   - platform: uptime
-    name: Uptime
+    name: "Uptime (raw)"
+    id: uptime_sensor
+    update_interval: 60s
 
 text_sensor:
   - platform: version
@@ -56,6 +58,25 @@ text_sensor:
   - platform: wifi_info
     ip_address:
       name: IP
+  - platform: template
+    name: "Uptime"
+    lambda: |-
+      int seconds = (int) id(uptime_sensor).state;
+      int days = seconds / 86400;
+      seconds %= 86400;
+      int hours = seconds / 3600;
+      seconds %= 3600;
+      int minutes = seconds / 60;
+      char buffer[64];
+      if (days > 0) {
+        snprintf(buffer, sizeof(buffer), "%id %ih %im", days, hours, minutes);
+      } else if (hours > 0) {
+        snprintf(buffer, sizeof(buffer), "%ih %im", hours, minutes);
+      } else {
+        snprintf(buffer, sizeof(buffer), "%im", minutes);
+      }
+      return {buffer};
+    update_interval: 60s
 
 binary_sensor:
   - platform: status
