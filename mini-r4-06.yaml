@@ -24,7 +24,7 @@ output:
 # LIGHT che usa l'output (visto da Home Assistant come lampadina)
 light:
   - platform: binary
-    name: ${friendly_name}
+    name: ""
     output: relay_output
     id: relay_1
     restore_mode: RESTORE_DEFAULT_OFF
