@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: esp01-th01
-  friendly_name: TH-TEMP01g
+  friendly_name: TH-TEMP01
   ip_addres: 192.168.100.41
   platform: esp8266
   board: esp01_1m
