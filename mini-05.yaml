@@ -32,7 +32,7 @@ light:
 binary_sensor:
   - platform: gpio
     pin: GPIO00
-    id: reset
+    id: button
     filters:
       - invert:
       - delayed_off: 10ms
