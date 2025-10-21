@@ -57,5 +57,5 @@ binary_sensor:
 # LED di stato
 status_led:
   pin:
-    number: GPIO19
+    number: GPIO13
     inverted: true

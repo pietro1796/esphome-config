@@ -16,44 +16,33 @@ packages:
 ## DEVICE CONFIG ##
 ###################
 
+# OUTPUT che controlla il relè
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay_output
+
+# LIGHT che usa l'output (visto da Home Assistant come lampadina)
+light:
+  - platform: binary
+    name: ""
+    output: relay_output
+    id: relay_1
+    restore_mode: RESTORE_DEFAULT_OFF
+
+# Pulsante fisico
 binary_sensor:
   - platform: gpio
-    pin:
-      number: GPIO0
-      mode: INPUT_PULLUP
-      inverted: True
-    name: Button
-    internal: True
+    pin: GPIO00
+    id: button
+    filters:
+      - invert:
+      - delayed_off: 10ms
     on_press:
-      # Prevents unintended LED lit states.
-      if:
-        condition:
-          - switch.is_off: relay
-        then:
-          - light.turn_on: blue_led
-          - switch.turn_on: relay
-        else:
-          - switch.turn_off: relay
-  - platform: status
-    name: Status
-    internal: True
+      - light.toggle: relay_1
 
-light:
-  - platform: status_led
-    id: blue_led
-    internal: True
-    pin:
-      number: GPIO13
-      inverted: True
-
-switch:
-  - platform: gpio
-    name: None
-    pin: GPIO12
-    id: relay
-    on_turn_off:
-      if:
-        condition:
-          - light.is_on: blue_led
-        then:
-          - light.turn_off: blue_led
+# LED di stato
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true
