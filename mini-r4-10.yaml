@@ -8,7 +8,7 @@ substitutions:
 
 # COMMON CONFIG
 packages:
-  common: !include packages/common.yaml
+  common: !include packages/common-mini-r4.yaml
 
 
 ###################
