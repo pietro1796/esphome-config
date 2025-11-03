@@ -121,7 +121,7 @@ switch:
     name: $friendly_name
     pin: GPIO13
     id: relay_1
-    restore_mode: RESTORE_DEFAULT_OFF
+    restore_mode: ALWAYS_ON
     on_turn_on:
       - delay: 500ms
       - light.turn_on: switch_led
