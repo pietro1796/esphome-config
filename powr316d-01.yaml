@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: powr316d-01
-  friendly_name: Lavatrice
+  friendly_name: Rack-CED
   ip_addres: 192.168.100.18
   update_interval: 5s
   platform: esp32
@@ -9,7 +9,7 @@ substitutions:
 
 # COMMON CONFIG
 packages:
-  common: !include packages/common.yaml
+  common: !include packages/common-espidf.yaml
   
 ###################
 ## DEVICE CONFIG ##
