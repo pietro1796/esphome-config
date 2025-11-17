@@ -33,7 +33,7 @@ uart:
 switch:
   - platform: gpio
     pin: GPIO13
-    restore_mode: ALWAYS_OFF
+    restore_mode: ALWAYS_ON
     id: relay
     name: None
     on_turn_on:
