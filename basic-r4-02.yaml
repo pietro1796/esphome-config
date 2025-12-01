@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: basic-r4-02
-  friendly_name: Free  Basic 02
+  friendly_name: Natale Gazebo
   ip_addres: 192.168.100.38
   platform: esp32
   board: esp32c3

@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: basic-r4-03
-  friendly_name: Free Basic 03
+  friendly_name: Spina Alloro
   ip_addres: 192.168.100.39
   platform: esp32
   board: esp32c3

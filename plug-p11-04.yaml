@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: plug-p11-04
-  friendly_name: Natale Gazebo
+  friendly_name: P11-01
   ip_addres: 192.168.100.24
   update_interval: 10s
   platform: esp8266
