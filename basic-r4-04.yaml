@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: basic-r4-04
-  friendly_name: Free Basic 04
+  friendly_name: Free Basic 04aaaa
   ip_addres: 192.168.100.40
   platform: esp32
   board: esp32c3
