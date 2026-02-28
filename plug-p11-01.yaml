@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: plug-p11-01
-  friendly_name: P11-01
+  friendly_name: Colonne Cucina
   ip_addres: 192.168.100.21
   update_interval: 1s
   platform: esp8266
@@ -78,3 +78,7 @@ sensor:
         - calibrate_linear:
           - 0.0 -> 0.0
           - 8.8 -> 16.8
+    energy:
+      name: Energy
+      filters:
+        - throttle_average: ${update_interval}
