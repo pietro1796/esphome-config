@@ -1,0 +1,19 @@
+# Pietro Customizations #
+substitutions:
+  device_name: bt-proxy-01
+  friendly_name: BT-Proxy-01
+  ip_addres: 192.168.100.51
+  platform: esp32
+  board: esp32-c3-devkitm-1
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common-espidf.yaml
+
+###################
+## DEVICE CONFIG ##
+###################
+
+# Bluetooth Proxy
+bluetooth_proxy:
+  active: True
