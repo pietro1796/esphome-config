@@ -14,6 +14,16 @@ packages:
 ## DEVICE CONFIG ##
 ###################
 
-# Bluetooth Proxy
+# Bluetooth Configuration
+esp32_ble_tracker:
+  scan_parameters: 
+    interval: 300ms
+    window: 300ms
+
+#  on_ble_advertise:
+#    then:
+#      - lambda: |-
+#          ESP_LOGD("ble_adv", "BLE device %s RSSI %d", x.address_str().c_str(), x.get_rssi());
+
 bluetooth_proxy:
   active: True
