@@ -37,8 +37,8 @@ binary_sensor:
     filters:
       - invert:
       - delayed_off: 10ms
-#    on_press:
-#      - light.toggle: relay_1
+    on_press:
+      - light.toggle: relay_1
 
 # Interruttore/Deviatore
   - platform: gpio
@@ -47,8 +47,8 @@ binary_sensor:
       number: GPIO27
       inverted: True
     id: switch_1
-    on_press:
-      - light.toggle: relay_1
+ #   on_press:
+ #     - light.toggle: relay_1
     ## COMMENTARE LE TRE RIGHE SOTTO SE VIENE INSTALLATO CON PULSANTE
     ## LASCIARE SE CON INTERRUTTORE E DEVIATORE
     #on_release:
