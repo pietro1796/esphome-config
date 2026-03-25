@@ -21,6 +21,10 @@ sensor:
     pin: 2
     temperature:
       name: "Temperatura ${place}"
+      filters:
+        - round: 1
+        - offset: -9.25
     humidity:
       name: "Umidità ${place}"
+      internal: True
     update_interval: 60s
