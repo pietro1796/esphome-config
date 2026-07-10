@@ -1,0 +1,33 @@
+# Pietro Customizations #
+substitutions:
+  device_name: c3-split-01
+  friendly_name: Clima Notte
+  ip_addres: 192.168.100.53
+  platform: esp32
+  board: esp32-c3-devkitm-1
+
+# COMMON CONFIG
+packages:
+  common: !include packages/common-espidf.yaml
+
+###################
+## DEVICE CONFIG ##
+###################
+
+# UART Configuration
+uart:
+  id: hp_uart
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 2400
+  parity: EVEN
+  data_bits: 8
+  stop_bits: 1
+
+climate:
+  - platform: mitsubishi_cn105
+    id: mitsubishi
+    name: ${friendly_name}
+    uart_id: hp_uart
+    update_interval: 5s
+    supported_swing_modes: 'VERTICAL'
