@@ -1,7 +1,7 @@
 # Pietro Customizations #
 substitutions:
   device_name: c3-split-01
-  friendly_name: Clima Notte
+  friendly_name: Clima Notte Da installare
   ip_addres: 192.168.100.53
   platform: esp32
   board: esp32-c3-devkitm-1
